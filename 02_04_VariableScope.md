@@ -37,8 +37,6 @@ Variables at the playbook scope are defined directly under the `vars` keyword in
         name: apache2
         state: started
 ```
-In this example, ansible_user is defined at both the group level (web_servers:vars) and the host level (webserver1). The host-level variable takes precedence for webserver1.
-
 ![image](https://github.com/nirajp82/Ansible/assets/61636643/6bbfa28b-5dab-4178-9669-ab4d22532b37)
 
 ## 3. Host Scope: 
