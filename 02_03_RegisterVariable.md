@@ -63,41 +63,35 @@ You can define variables in various places within Ansible. However, when there a
 
 ### Understanding Variable Precedence
 
-1. **Command Line Values:**
-   - Command-line options like `-u my_user` have the lowest precedence and are not considered variables.
-2. **Role Defaults:**
-   - Variables defined in a role's `defaults/main.yml` file.
-3. **Inventory and Playbook Group Vars:**
-   - Variables in inventory group variables (`group_vars`) and playbook-level group variables.
-   - `group_vars/all` precedes other group variables.
-4. **Inventory and Playbook Host Vars:**
-   - Variables set for specific hosts in inventory (`host_vars`) and playbook host variables.
-   - `host_vars/*` directories have a lower precedence than host-specific definitions.
-5. **Host Facts / Cached set_facts:**
-   - Variables derived from facts about hosts.
-6. **Playbook and Role Vars:**
-   - Variables defined in playbooks (`vars`) and roles (`vars/main.yml`).
-   - Role variables in the `vars` directory override previous versions.
-7. **Task and Block Vars:**
-   - Variables defined within tasks or blocks.
-8. **include_vars:**
-   - Variables loaded from external files using `include_vars` tasks.
-9. **set_facts / registered Vars:**
-   - Variables set during playbook execution, either manually or through tasks.
-10. **Role (and include_role) Params:**
-    - Parameters defined in roles.
-11. **Include Params:**
-    - Parameters passed through `include` statements.
-12. **Extra Vars:**
-    - Variables set using `-e` command-line option, always having the highest precedence.
+## Understanding Variable Precedence in Ansible
 
-### Best Practices and Guidelines
+Ansible applies variable precedence, which determines the order in which variables are chosen when multiple options exist. Here's the precedence order from least to greatest (variables listed last override all others):
 
-- **Consistency is Key:** Define each variable in one place to avoid confusion and conflicts.
-- **Explicit Scope:** Variables defined in more specific scopes override those in broader scopes.
+- Command line values (e.g., -u my_user, not considered variables)
+- Role defaults (defined in role/defaults/main.yml)
+- Inventory file or script group vars
+- Inventory group_vars/all
+- Playbook group_vars/all
+- Inventory group_vars/*
+- Playbook group_vars/*
+- Inventory file or script host vars
+- Inventory host_vars/*
+- Playbook host_vars/*
+- Host facts / cached set_facts
+- Play vars
+- Play vars_prompt
+- Play vars_files
+- Role vars (defined in role/vars/main.yml)
+- Block vars (only for tasks in block)
+- Task vars (only for the task)
+- include_vars
+- set_facts / registered vars
+- Role (and include_role) params
+- Include params
+- Extra vars (e.g., -e "user=my_user") always win precedence
 
-Understanding variable precedence ensures that the right variables are used in Ansible playbooks, avoiding unexpected behavior due to conflicting variable values.
+In general, Ansible prioritizes variables defined more recently, actively, and with explicit scope. Variables in a role's defaults folder are easily overridden. Variables in the vars directory of a role override previous versions in the namespace. Host and/or inventory variables override role defaults, but explicit includes like vars directory or include_vars tasks take precedence over inventory variables.
 
-For detailed information about merging variables in inventory, refer to the official Ansible documentation: [How variables are merged](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#how-variables-are-merged).
+Ansible merges variables set in inventory, allowing more specific settings to override generic ones. For example, ansible_ssh_user specified as a group_var is overridden by ansible_user specified as a host_var. For details about variable precedence in inventory, see [How variables are merged](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#how-variables-are-merged).
 
 References: https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
