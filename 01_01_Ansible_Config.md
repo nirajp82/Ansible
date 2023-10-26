@@ -9,7 +9,7 @@ Configuration allows users to customize Ansible's behavior according to their sp
 **Configuration Hierarchy:**
 
 1. **Built-in Defaults:**
-   Ansible has built-in default values for various configuration options. These serve as the baseline settings.
+   Ansible has built-in default values for various configuration options. These serve as the baseline settings. The built-in default values for Ansible configuration options are defined within the Ansible source code itself. These default values are part of the Ansible codebase and are not stored in a separate file. When you install Ansible, these default values are included in the executable and are used by Ansible when no other configuration source (such as configuration files, environment variables, or command-line options) provides specific values for the options
 
 2. **Global Configuration File (`/etc/ansible/ansible.cfg`):**
    A global configuration file is located at `/etc/ansible/ansible.cfg`. Settings in this file apply globally to all users and playbooks unless overridden.
@@ -32,47 +32,6 @@ Configuration allows users to customize Ansible's behavior according to their sp
    ansible-playbook -i /path/to/inventory playbook.yml
    ```
 
-**Real-World Example:**
-
-*Scenario: Setting the Inventory File Path*
-
-Let's say you want to specify a custom inventory file for your Ansible playbook.
-
-1. **Built-in Default:**
-   - Ansible's default inventory file path is `/etc/ansible/hosts`.
-
-2. **Environment Variable:**
-   ```bash
-   export ANSIBLE_INVENTORY=/path/to/custom/inventory
-   ```
-   The `ANSIBLE_INVENTORY` environment variable overrides the default inventory file.
-
-3. **Global Configuration File (`/etc/ansible/ansible.cfg`):**
-   ```ini
-   [defaults]
-   inventory = /path/to/global/inventory
-   ```
-   The global configuration file specifies a different inventory file path.
-
-4. **Local User Configuration File (`~/.ansible.cfg`):**
-   ```ini
-   [defaults]
-   inventory = /path/to/user/inventory
-   ```
-   The user-specific configuration file overrides the global configuration.
-
-5. **Playbook Configuration File (`ansible.cfg` in the Playbook Directory):**
-   ```ini
-   [defaults]
-   inventory = /path/to/playbook/inventory
-   ```
-   The `ansible.cfg` file in the playbook directory specifies a playbook-specific inventory file path.
-
-6. **Command-Line Option:**
-   ```bash
-   ansible-playbook -i /path/to/command/line/inventory playbook.yml
-   ```
-   The inventory file provided in the command line (`/path/to/command/line/inventory`) takes precedence over all other settings.
 
 ### Viewing Ansible Configuration:
 
