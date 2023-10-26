@@ -192,3 +192,47 @@ Certainly! Below is a list of commonly used Ansible parameters in inventory file
     - Example: `ansible_winrm_server_cert_validation=False`
 
 These parameters provide flexibility and control when connecting to and managing remote servers using Ansible. They allow you to customize the connection and authentication methods according to your specific infrastructure requirements.
+
+
+### Inventory Aliases
+
+You can define aliases in your Ansible inventory using host variables:
+
+#### INI Format:
+
+```ini
+[jumper]
+ansible_port=5555
+ansible_host=192.0.2.50
+```
+
+In the INI format, the `[jumper]` section defines the host alias, and the `ansible_port` and `ansible_host` variables specify the SSH port and IP address, respectively.
+
+#### YAML Format:
+
+```yaml
+---
+jumper:
+  ansible_port: 5555
+  ansible_host: 192.0.2.50
+```
+
+In the YAML format, the host alias "jumper" is defined as a key, and the associated connection parameters (`ansible_port` and `ansible_host`) are specified as key-value pairs.
+
+When you run Ansible commands against the host alias "jumper" Ansible will use the defined connection parameters (`ansible_port=5555` and `ansible_host=192.0.2.50`) to establish the SSH connection to the remote host at the specified IP address and port number. This method enhances readability and simplifies the management of connection details for specific hosts or aliases in your Ansible inventory files.
+
+Example of how you might run a simple Ansible ad-hoc command using the "jumper" alias:
+
+```bash
+ansible jumper -m ping
+```
+
+In this command:
+
+- `ansible` is the Ansible command-line tool.
+- `jumper` is the alias specified in your inventory file.
+- `-m ping` specifies the Ansible module to run, in this case, the "ping" module which tests connectivity to the target hosts.
+
+When you run this command, Ansible will use the defined connection parameters (port `5555` and host `192.0.2.50`) associated with the "jumper" alias to establish an SSH connection and execute the ping module on the remote host.
+
+This is just a basic example; you can replace `-m ping` with any other module and provide additional options as needed for your specific use case.
