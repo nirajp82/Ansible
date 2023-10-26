@@ -57,11 +57,6 @@ ansible-playbook example.yml
 
 This command will run the playbook, displaying `"Hello, Ansible!"` as the output because it's captured by `command_output` and accessed through `command_output.stdout` in the `debug` module.
 
-## Variable Precedence in Ansible
-
-You can define variables in various places within Ansible. However, when there are multiple variables with the same name, Ansible determines which one to use based on a specific order called **variable precedence**. Here's a breakdown:
-
-### Understanding Variable Precedence
 
 ## Understanding Variable Precedence in Ansible
 
