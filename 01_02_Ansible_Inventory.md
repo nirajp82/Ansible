@@ -6,6 +6,23 @@ Ansible automates tasks on managed nodes or “hosts” in your infrastructure, 
 
 The inventory file is typically named `inventory` and can be placed in the root directory of your Ansible project. However, Ansible allows multiple inventory files, and you can specify their location using the `-i` option when running Ansible commands
 
+# Sample Inventory File
+```ini  
+# Web Servers
+web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+
+# Database Servers
+db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Password123!
+
+[web_servers]
+web1
+web2
+
+[db_servers]
+db1
+```
+
 ### Default Groups
 
 Even if you do not define any groups in your inventory file, Ansible creates two default groups: **all** and **ungrouped**. 
