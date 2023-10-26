@@ -85,7 +85,15 @@ allowed_ports:
 ```
 
 **Explanation:**
-List variables store multiple related values. `allowed_ports` is a list of ports. The `with_items` loop iterates over the list and displays a debug message for each port, indicating the port number being opened in the firewall.
+In this scenario, `allowed_ports` is a list variable containing multiple port numbers. The `with_items` loop iterates over each port in the list and uses `{{ item }}` to display individual ports within the debug message. For each iteration, a debug message is printed, indicating the port being processed.
+
+**Detailed Explanation:**
+- `allowed_ports` is a list variable storing `[80, 443, 8080]`.
+- `with_items: "{{ allowed_ports }}"` enables iteration over each item in the list.
+- `{{ item }}` represents the current port being processed during each iteration.
+- The debug message is printed multiple times, once for each port in the list, displaying the port number being opened in the firewall.
+
+This detailed explanation provides insight into how list variables are defined and utilized in Ansible playbooks, enabling dynamic and iterative operations within tasks.
 
 ## 5. Dictionary Variable
 
