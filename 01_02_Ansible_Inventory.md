@@ -127,7 +127,7 @@ test:
 
 This hierarchical organization simplifies management and configuration by allowing you to handle larger infrastructure in smaller, more manageable chunks.
 
-**Parameters:**
+### **Parameters:**
 
 Certainly! Below is a list of commonly used Ansible parameters in inventory files along with their descriptions:
 
