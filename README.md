@@ -86,13 +86,7 @@ db1 ansible_ssh_host=192.168.1.104
   - Installs Apache (`apache2` package) using the `apt` module.
   - Configures Apache using a Jinja2 template (`apache_virtualhost.conf.j2`).
   - Restarts Apache when the configuration changes using a handler.
-
-- **`appserver`:**
-  - Installs Java and Tomcat (`default-jdk` and `tomcat8` packages) using the `apt` module.
-
-- **`dbserver`:**
-  - Installs MySQL (`mysql-server` package) using the `apt` module.
-    
+   
 - **`webserver/tasks/main.yml`**:
 
   ```yaml
@@ -144,6 +138,9 @@ db1 ansible_ssh_host=192.168.1.104
       state: restarted
   ```
 
+- **`appserver`:**
+  - Installs Java and Tomcat (`default-jdk` and `tomcat8` packages) using the `apt` module.
+
 - **`appserver/tasks/main.yml`** (Example tasks for application server):
 
   ```yaml
@@ -156,7 +153,10 @@ db1 ansible_ssh_host=192.168.1.104
       - default-jdk
       - tomcat8
   ```
-
+  
+- **`dbserver`:**
+  - Installs MySQL (`mysql-server` package) using the `apt` module.
+  
 - **`dbserver/tasks/main.yml`** (Example tasks for database server):
 
   ```yaml
