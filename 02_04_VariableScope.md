@@ -39,7 +39,7 @@ Variables at the playbook scope are defined directly under the `vars` keyword in
 
 ## 3. Task Scope
 
-Variables in task scope are defined within a specific task using the `register` keyword. They store the output of the task, such as the result of a command or the content of a file. These variables are specific to the task in which they are defined and can be accessed in subsequent tasks within the same play.
+Variables in task scope are defined within a specific task using the `register` keyword. They store the output of the task, such as the result of a command or the content of a file. These variables are specific to the task in which they are defined and can be accessed in subsequent tasks (Tasks that appear after the current task in the playbook.) within the same play.
 
 **Example:**
 
@@ -47,10 +47,15 @@ Variables in task scope are defined within a specific task using the `register` 
 ---
 - hosts: web_servers
   tasks:
-    - name: Get free disk space
+    - name: Task 1 - Get disk space
       command: df -h /
       register: disk_space
-    - name: Display free disk space
+    
+    - name: Task 2 - Some task that does not use the variable
+      debug:
+        msg: "This task does not use the disk_space variable"
+    
+    - name: Task 3 - Display disk space (uses variable from Task 1)
       debug:
         var: disk_space.stdout_lines
 ```
