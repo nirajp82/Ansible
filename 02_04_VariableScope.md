@@ -38,10 +38,26 @@ Variables at the playbook scope are defined directly under the `vars` keyword in
         state: started
 ```
 
-## 3. Host Scope: The host scope refers to the visibility of variables specific to a particular host in the inventory. Variables can be defined for hosts or groups in the inventory file, and these variables have a scope limited to the host or group for which they are defined.
+## 3. Host Scope: 
+
+The host scope refers to the visibility of variables specific to a particular host in the inventory. Variables can be defined for hosts or groups in the inventory file, and these variables have a scope limited to the host or group for which they are defined.
 ![image](https://github.com/nirajp82/Ansible/assets/61636643/1cad725c-b464-4dee-9f55-26caed46b9b3)
 
-## 3. Task Scope
+When variables are defined at both the host and group levels, host-level variables take precedence. For example, if a variable is defined both for a host and for a group that the host is a part of, the host-level variable value will override the group-level variable value for that specific host.
+
+```ini
+[web_servers]
+webserver1 ansible_ssh_host=192.168.1.101 ansible_user=admin
+
+[database_servers]
+dbserver1 ansible_ssh_host=192.168.1.201 ansible_user=dbadmin
+
+[web_servers:vars]
+ansible_user=webadmin
+```
+In this example, ansible_user is defined at both the group level (web_servers:vars) and the host level (webserver1). The host-level variable takes precedence for webserver1.
+
+## 4. Task Scope
 
 Variables in task scope are defined within a specific task using the `register` keyword. They store the output of the task, such as the result of a command or the content of a file. These variables are specific to the task in which they are defined and can be accessed in subsequent tasks (Tasks that appear after the current task in the playbook.) within the same play.
 
@@ -76,7 +92,7 @@ Variables in role scope are defined within a role and are stored in the `default
 http_port: 80
 ```
 
-## 5. Inventory Scope
+## 6. Inventory Scope
 
 Variables in inventory scope are defined in inventory files or inventory directories (`group_vars` and `host_vars`). They are specific to hosts or groups in the inventory and override role defaults or playbook-level variables for those hosts or groups.
 
