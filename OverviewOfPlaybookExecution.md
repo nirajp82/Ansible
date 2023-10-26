@@ -1,4 +1,4 @@
-Certainly! When an Ansible playbook starts, it initiates a multi-step process for each host specified in the inventory file, leveraging parallel execution and variable interpolation. Here's a detailed breakdown of these stages:
+When an Ansible playbook starts, it initiates a multi-step process for each host specified in the inventory file, leveraging parallel execution and variable interpolation. 
 
 ### **1. Sub-Process Creation:**
    - Ansible creates multiple sub-processes, enabling parallel execution for hosts. Each host gets a dedicated sub-process, allowing tasks to be performed concurrently on different hosts.
