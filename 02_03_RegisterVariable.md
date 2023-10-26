@@ -2,30 +2,60 @@
 
 ### Table of Contents
 
-1. **Registering Variables**
+1. **Registering Variables and Accessing Their Values**
 2. **Variable Precedence in Ansible**
 
 ---
 
-## 1. Registering Variables
+## 1. Registering Variables and Accessing Their Values
 
-In Ansible, you can capture the output of commands or the results of tasks and use them as variables in subsequent tasks. This process is known as **registering variables**. Here's how you do it:
-
-### Example: Registering a Variable
+When you use the `register` statement in an Ansible task, it captures the output of a command or the result of a task and stores it in a variable for later use. Here's the breakdown of the statement:
 
 ```yaml
 - name: Run a command and register the output
   shell: echo "Hello, Ansible!"
   register: command_output
+```
 
+In this example:
+- `shell: echo "Hello, Ansible!"` runs the shell command and produces the output `"Hello, Ansible!"`.
+- `register: command_output` captures this output and stores it in a variable called `command_output`.
+
+Now, let's understand the relation with `var: command_output.stdout`.
+
+```yaml
 - name: Display the registered variable
   debug:
     var: command_output.stdout
 ```
 
-**Explanation:**
-- In the first task, the `shell` module runs a command (`echo "Hello, Ansible!"`) and its output is captured and stored in a variable called `command_output`.
-- The registered variable `command_output` contains several attributes, including `stdout` which holds the standard output of the command.
+In this part:
+- `debug` is a Ansible module used to print messages during playbook execution.
+- `var: command_output.stdout` accesses the `stdout` attribute of the variable `command_output`.
+
+Here's a step-by-step explanation:
+
+1. **Running the Command:**
+   - The `shell` module executes the command `echo "Hello, Ansible!"`.
+   - The output, `"Hello, Ansible!"`, is generated.
+
+2. **Registering the Output:**
+   - `register: command_output` captures the output and saves it in the variable `command_output`.
+
+3. **Accessing the Output:**
+   - `command_output.stdout` refers to the standard output of the registered command.
+
+When you run this YAML file using Ansible, it executes the shell command, captures the output, and then prints it using the `debug` module.
+
+### Example of Running the YAML File:
+
+Save the above YAML code in a file named `example.yml`. To execute the playbook, use the `ansible-playbook` command:
+
+```bash
+ansible-playbook example.yml
+```
+
+This command will run the playbook, displaying `"Hello, Ansible!"` as the output because it's captured by `command_output` and accessed through `command_output.stdout` in the `debug` module.
 
 ## 2. Variable Precedence in Ansible
 
