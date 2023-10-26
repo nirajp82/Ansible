@@ -14,7 +14,9 @@ Ansible operates by connecting to nodes (machines or servers) through SSH (Secur
 
 3. **Modules:** Modules are pre-built scripts that perform tasks on remote nodes. Ansible has a vast library of modules for various purposes, like managing packages, users, files, and services.
 
-4. **Inventory:** The inventory file contains information about the managed nodes. Ansible uses this file to determine which hosts to manage and how to connect to them.
+4. **Inventory:** The inventory file contains information about the managed nodes. Ansible uses this file to determine which hosts to manage and how to connect to them (Using SSH or Windows powershell remoting). That's what makes Ansible Agentless. Agentless means that you don't need to install any additional software on the target machines to be able to work with Ansible.
+
+A simple SSH connectivity would suffice Ansible's needs.
 
 5. **Handlers:** Handlers are tasks triggered by other tasks. For instance, if a configuration file is changed, a handler can be used to restart the corresponding service.
 
