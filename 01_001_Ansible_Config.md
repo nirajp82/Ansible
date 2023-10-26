@@ -74,4 +74,26 @@ Let's say you want to specify a custom inventory file for your Ansible playbook.
    ```
    The inventory file provided in the command line (`/path/to/command/line/inventory`) takes precedence over all other settings.
 
+### Viewing Ansible Configuration:
+
+To view the current Ansible configuration, you can use the following command:
+
+```bash
+ansible-config view
+```
+
+This command will display the effective configuration based on the hierarchy described above. It will show you the configuration settings from the global, user, and playbook-specific configuration files, as well as any environment variables that are set.
+
+### Dumping Ansible Configuration:
+
+To dump the current Ansible configuration to a file, you can use the following command:
+
+```bash
+ansible-config dump --output=config_dump.txt
+```
+
+This command will dump the entire configuration to the specified file (`config_dump.txt` in this case). You can replace `config_dump.txt` with the desired file path.
+
+By understanding the configuration file hierarchy and using commands like `ansible-config view` and `ansible-config dump`, you can effectively manage Ansible configurations, ensuring that the desired settings are applied during playbook execution.
+
 By understanding the configuration hierarchy and utilizing environment variables, configuration files, and command-line options, users can precisely control Ansible's behavior, adapting it to different scenarios and requirements.
