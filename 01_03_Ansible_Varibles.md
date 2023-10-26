@@ -31,6 +31,8 @@ webserver ansible_host=192.168.1.101
 [web:vars]
 web_server_port=80
 ```
+* [web:vars]: This line defines variables specific to the [web] group. Any variables declared under [web:vars] will be applied to all hosts within the web group. Variables provide a way to store values that can be referenced in playbooks or templates.
+
 
 **3. How to Use Variables:**
 
