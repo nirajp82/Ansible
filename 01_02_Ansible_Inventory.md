@@ -13,7 +13,7 @@ web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root a
 web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
 
 # Database Servers
-db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Password123!
+db1 ansible_host=server3.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Password123!
 
 [web_servers]
 web1
@@ -21,6 +21,10 @@ web2
 
 [db_servers]
 db1
+
+[all_servers:children]
+web_servers
+db_servers
 ```
 
 ### Default Groups
