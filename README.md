@@ -34,8 +34,8 @@ Ansible operates by connecting to nodes (machines or servers) through SSH (Secur
 
 7. **Security:** Ansible promotes security by allowing secure communication (SSH encryption), version-controlled playbooks (for audit trails), and fine-grained access control.
 
-In summary, Ansible is a powerful automation tool used for simplifying complex IT tasks, ensuring consistency across systems, and improving overall operational efficiency. It is widely adopted in the IT industry for various automation needs.
 
+### Example
 Consider a scenario where we manage a multi-tier application consisting of web servers, application servers, and a database server. We'll use roles, modules, handlers, inventory, and playbooks in this example.
 
 ### Scenario: Deploying a Multi-tier Application
@@ -180,3 +180,5 @@ db1 ansible_ssh_host=192.168.1.104
 5. **Playbook:** The main playbook (`main.yml`) ties everything together. It specifies the hosts, becomes a superuser (`become: yes`), and assigns roles to different server groups.
 
 When you run this playbook (`ansible-playbook -i inventory.ini main.yml`), Ansible will configure the web servers, application servers, and database servers according to their specific roles, utilizing modules, templates, and handlers as defined in the roles.
+
+In summary, Ansible is a powerful automation tool used for simplifying complex IT tasks, ensuring consistency across systems, and improving overall operational efficiency. It is widely adopted in the IT industry for various automation needs.
