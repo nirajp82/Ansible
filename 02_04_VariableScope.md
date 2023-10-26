@@ -20,6 +20,8 @@ Variables in the global scope are accessible throughout all playbooks and roles.
 - **Ansible Configuration:** Variables set here apply globally to all playbooks and roles.
 - **Environment Variables:** Variables set in the environment where Ansible runs.
 
+ ![image](https://github.com/nirajp82/Ansible/assets/61636643/9564ec1a-7574-476f-b6a9-a480a1569212)
+
 ## 2. Playbook Scope
 
 Variables at the playbook scope are defined directly under the `vars` keyword in a playbook. They are accessible to all tasks within that playbook. These variables are typically used to store configuration values specific to that playbook.
