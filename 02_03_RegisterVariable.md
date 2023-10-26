@@ -57,22 +57,47 @@ ansible-playbook example.yml
 
 This command will run the playbook, displaying `"Hello, Ansible!"` as the output because it's captured by `command_output` and accessed through `command_output.stdout` in the `debug` module.
 
-## 2. Variable Precedence in Ansible
+## Variable Precedence in Ansible
 
-In Ansible, variables can come from various sources such as inventory files, playbooks, roles, and facts. Understanding the **variable precedence** helps in determining which value a variable will take if it is defined in multiple places.
+You can define variables in various places within Ansible. However, when there are multiple variables with the same name, Ansible determines which one to use based on a specific order called **variable precedence**. Here's a breakdown:
 
-The order of precedence (from lowest to highest) is as follows:
+### Understanding Variable Precedence
 
-1. **Role defaults:** Variables defined in a role's `defaults/main.yml` file.
-2. **Inventory variables:** Variables set in inventory files or inventories generated dynamically.
-3. **Playbook variables:** Variables defined in the playbook itself.
-4. **Included files:** Variables defined in files included in the playbook.
-5. **Block variables:** Variables defined within a `block`.
-6. **Task facts:** Facts gathered by tasks and registered as variables.
-7. **Role variables:** Variables defined in a role's `vars/main.yml` file.
-8. **Set_facts:** Variables set using the `set_fact` module.
-9. **Play facts:** Facts gathered during the play and available as variables.
+1. **Command Line Values:**
+   - Command-line options like `-u my_user` have the lowest precedence and are not considered variables.
+2. **Role Defaults:**
+   - Variables defined in a role's `defaults/main.yml` file.
+3. **Inventory and Playbook Group Vars:**
+   - Variables in inventory group variables (`group_vars`) and playbook-level group variables.
+   - `group_vars/all` precedes other group variables.
+4. **Inventory and Playbook Host Vars:**
+   - Variables set for specific hosts in inventory (`host_vars`) and playbook host variables.
+   - `host_vars/*` directories have a lower precedence than host-specific definitions.
+5. **Host Facts / Cached set_facts:**
+   - Variables derived from facts about hosts.
+6. **Playbook and Role Vars:**
+   - Variables defined in playbooks (`vars`) and roles (`vars/main.yml`).
+   - Role variables in the `vars` directory override previous versions.
+7. **Task and Block Vars:**
+   - Variables defined within tasks or blocks.
+8. **include_vars:**
+   - Variables loaded from external files using `include_vars` tasks.
+9. **set_facts / registered Vars:**
+   - Variables set during playbook execution, either manually or through tasks.
+10. **Role (and include_role) Params:**
+    - Parameters defined in roles.
+11. **Include Params:**
+    - Parameters passed through `include` statements.
+12. **Extra Vars:**
+    - Variables set using `-e` command-line option, always having the highest precedence.
 
-**Note:** Variables set by higher-precedence sources override those set by lower-precedence sources.
+### Best Practices and Guidelines
 
-Understanding variable precedence ensures predictable behavior in Ansible playbooks and helps avoid unexpected variable values.
+- **Consistency is Key:** Define each variable in one place to avoid confusion and conflicts.
+- **Explicit Scope:** Variables defined in more specific scopes override those in broader scopes.
+
+Understanding variable precedence ensures that the right variables are used in Ansible playbooks, avoiding unexpected behavior due to conflicting variable values.
+
+For detailed information about merging variables in inventory, refer to the official Ansible documentation: [How variables are merged](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#how-variables-are-merged).
+
+References: https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
