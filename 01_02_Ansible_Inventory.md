@@ -134,6 +134,12 @@ Certainly! Below is a list of commonly used Ansible parameters in inventory file
 1. **ansible_host:**
    - Specifies the IP address or hostname of the server.
    - Example: `ansible_host=192.168.1.101`
+  
+2. **ansible_connection:**
+   - Specifies the connection type, such as `ssh`, `winrm`, `paramiko`, or `local`.
+   - Example: `ansible_connection=ssh`
+     - `SSH`: Linux based system
+     - `winrm`: Windows based system
 
 2. **ansible_port:**
    - Specifies the SSH port number of the server. Default is 22.
@@ -162,10 +168,6 @@ Certainly! Below is a list of commonly used Ansible parameters in inventory file
 8. **ansible_become_method:**
    - Specifies the method used for privilege escalation, such as `sudo` or `su`.
    - Example: `ansible_become_method=sudo`
-
-9. **ansible_connection:**
-   - Specifies the connection type, such as `ssh`, `paramiko`, or `local`.
-   - Example: `ansible_connection=ssh`
 
 10. **ansible_python_interpreter:**
     - Sets the path to the Python interpreter on the remote server.
