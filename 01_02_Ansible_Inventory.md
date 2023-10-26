@@ -157,6 +157,9 @@ Certainly! Below is a list of commonly used Ansible parameters in inventory file
    - Sets the SSH password for connecting to the server.
    - Example: `ansible_ssh_pass=my_password`
 
+6. **ansible_password:**
+   - Set password for Windows based hosts
+
 6. **ansible_become:**
    - Enables or disables privilege escalation (sudo) on the server.
    - Example: `ansible_become=yes`
