@@ -6,9 +6,10 @@ Variables in Ansible have different scopes, determining where they are accessibl
 
 1. **Global Scope**
 2. **Playbook Scope**
-3. **Task Scope**
-4. **Role Scope**
-5. **Inventory Scope**
+3. **Host Scope**
+4. **Task Scope**
+5. **Role Scope**
+6. **Inventory Scope**
 
 ---
 
@@ -36,6 +37,9 @@ Variables at the playbook scope are defined directly under the `vars` keyword in
         name: apache2
         state: started
 ```
+
+## 3. Host Scope: The host scope refers to the visibility of variables specific to a particular host in the inventory. Variables can be defined for hosts or groups in the inventory file, and these variables have a scope limited to the host or group for which they are defined.
+![image](https://github.com/nirajp82/Ansible/assets/61636643/1cad725c-b464-4dee-9f55-26caed46b9b3)
 
 ## 3. Task Scope
 
