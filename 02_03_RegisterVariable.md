@@ -95,13 +95,13 @@ Ansible variable precedence determines the order in which Ansible resolves varia
 
 The Ansible variable precedence is as follows:
 
-1. **Task variables:** Variables defined in the current task.
+1. **Task variables:** Variables defined in the current task. (Highest precedence.)
 2. **Block variables:** Variables defined in the current block.
 3. **Role variables:** Variables defined in the role that is being executed.
 4. **Play variables:** Variables defined in the playbook.
 5. **Host variables:** Variables defined for the current host in the inventory.
 6. **Facts:** Facts gathered from the current host.
-7. **Global variables:** Variables defined in the Ansible configuration file, environment variables, and command line arguments.
+7. **Global variables:** Variables defined in the Ansible configuration file, environment variables, and command line arguments. (Lowest)
 
    Task variables have the highest precedence, followed by block variables, role variables, play variables, host variables, facts, and global variables.
 
