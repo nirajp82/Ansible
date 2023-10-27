@@ -115,3 +115,65 @@ Example:
 ```bash
 ansible-playbook playbook.yml --extra-vars "nginx_port=8087"
 ```
+
+```yaml
+# Play variables
+webserver_port: 80
+
+# Host variables
+webserver_port: 443
+
+# Task
+- name: Configure Apache2
+  lineinfile:
+    path: /etc/apache2/sites-available/000-default
+    line: "Listen {{ webserver_port }}"
+
+```
+
+In this example, the `webserver_port` variable is defined in both the play scope and the host scope. However, the play scope has higher precedence than the play scope. This means that the value of the `webserver_port` variable will be 80, which is the value defined in the play scope.
+
+You can also use variable precedence to override the default behavior of Ansible. For example, you can use the `hostvars` scope to override the value of a global variable for a specific host. This can be useful for configuring hosts with different settings.
+
+Here is an example of how to use the `hostvars` scope to override the value of a global variable:
+
+```yaml
+# Global variables
+ansible_python_interpreter: /usr/bin/python2
+
+# Host variables
+[webservers:example.com]
+webserver_python_interpreter: /usr/bin/python3
+
+# Task
+- name: Install Python3
+  apt:
+    name: python3
+  when: ansible_python_interpreter != hostvars['webserver_python_interpreter']
+```
+
+In this example, the `ansible_python_interpreter` variable is defined in the global scope. However, the `webserver_python_interpreter` variable is defined in the host scope for the host `example.com`. This means that the `Install Python3` task will only be executed on the host `example.com`.
+
+```yaml
+# Global variable
+ansible_python_interpreter: /usr/bin/python2
+
+# Play variable
+webserver_port: 80
+
+# Host variable
+webserver_port: 443
+
+# Task variable
+webserver_port: 8080
+
+# ...
+
+# Task
+- name: Configure Apache2
+  lineinfile:
+    path: /etc/apache2/sites-available/000-default
+    line: "Listen {{ webserver_port }}"
+```
+In this example, the value of the webserver_port variable used in the Configure Apache2 task will be 8080, because the task variable has the highest precedence.
+
