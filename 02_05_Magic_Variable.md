@@ -15,11 +15,45 @@ Magic variables can be used to make your Ansible playbooks more dynamic and reus
 
 Here are some of the most commonly used magic variables in Ansible:
 
-* **hostvars:** This variable provides access to all variables defined for the current host, including inventory variables, facts, and variables registered by previous tasks.
-* **groups:** This variable contains a list of all groups that the current host belongs to.
-* **group_names:** This variable contains a list of all group names in the current inventory.
-* **inventory_hostname:** This variable contains the name of the current host as defined in the inventory.
-* **ansible_facts:** This variable contains a dictionary of all Ansible facts that have been gathered for the current host.
+
+1. **`ansible_date_time`**:
+   - Contains information about the current date and time on the Ansible control node.
+   
+2. **`ansible_default_ipv4`** and **`ansible_default_ipv6`**:
+   - Contain information about the default IPv4 and IPv6 addresses of the target host respectively.
+
+3. **`ansible_distribution`**, **`ansible_distribution_version`**, **`ansible_os_family`**:
+   - Provide details about the Linux distribution, its version, and the OS family (like Debian, RedHat, etc.) of the target system.
+
+4. **`ansible_env`**:
+   - Contains environment variables of the Ansible controller system.
+
+5. **`ansible_facts`**:
+   - Contains all facts gathered from the target host.
+
+6. **`ansible_hostname`**:
+   - Stores the hostname of the target system.
+
+7. **`ansible_inventory_hostname`**:
+   - Contains the hostname of the target system as provided in the inventory file.
+
+8. **`ansible_play_batch`** and **`ansible_play_hosts`**:
+   - Contain a list of all hosts in the current play batch or all hosts in the current play, respectively.
+
+9. **`ansible_python_version`**:
+   - Contains the version of Python installed on the target system.
+
+10. **`ansible_ssh_host`** and **`ansible_ssh_port`**:
+    - Store the SSH host and port information used to connect to the target host.
+
+11. **`ansible_user`** and **`ansible_ssh_user`**:
+    - Store the user used to SSH into the target host.
+
+12. **`inventory_hostname`**:
+    - Contains the hostname of the current host being iterated in a play.
+
+13. **`group_names`** and **`groups`**:
+    - `group_names` contains a list of groups the current host is a member of, while `groups` provides information about all groups and their members in the inventory.
 
 **How to use magic variables**
 
