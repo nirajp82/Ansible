@@ -98,8 +98,8 @@ The Ansible variable precedence is as follows:
 1. **Task variables:** Variables defined in the current task. (Highest precedence.)
 2. **Block variables:** Variables defined in the current block.
 3. **Role variables:** Variables defined in the role that is being executed.
-4. **Play variables:** Variables defined in the playbook.
-5. **Host variables:** Variables defined for the current host in the inventory.
+4. **Play variables:** Variables defined in the playbook. These variables are specific to the play and can be used across all hosts defined in that play. They are useful for defining variables that are applicable to a specific set of tasks within a play.
+5. **Host variables:** Variables defined for the current host in the inventory. These variables are specific to individual hosts and are defined within host-specific files in the `host_vars/` directory or directly in the inventory file. These variables are used to customize tasks or templates for specific hosts in Ansible playbooks. 
 6. **Facts:** Facts gathered from the current host.
 7. **Global variables:** Variables defined in the Ansible configuration file, environment variables, and command line arguments. (Lowest)
 
