@@ -53,7 +53,7 @@ Here are some of the most commonly used magic variables in Ansible:
     - Contains the hostname of the current host being iterated in a play.
 
 13. **`group_names`** and **`groups`**:
-    - `group_names` contains a list of groups the current host is a member of, while `groups` provides information about all groups and their members in the inventory.
+    - `group_names` contains a list of groups the current host is a member of, while `groups` Groups return all hosts under a given group.
 
 **How to use magic variables**
 
