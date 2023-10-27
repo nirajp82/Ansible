@@ -65,3 +65,35 @@ ansible-playbook playbook.yml
 ```
 
 Ansible playbooks provide a powerful way to automate infrastructure management and application deployment. By following this structured format, you can create efficient, organized, and maintainable automation solutions for your IT environment.
+
+
+![image](https://github.com/nirajp82/Ansible/assets/61636643/1c6af829-65ac-4219-91d3-6e57962a9b61)
+
+# Ansible Play vs Ansible Playbook
+
+In Ansible, understanding the difference between ad hoc commands, plays, and playbooks is essential for effective automation. Here's a breakdown:
+
+## Ansible Ad Hoc Commands:
+Ad hoc commands are single, simple tasks executed against targeted hosts. They are ideal for one-time tasks. However, the true power of Ansible lies in playbooks.
+
+## Ansible Play:
+A play is an ordered set of tasks that should be executed against hosts selected from your inventory. Each play specifies:
+
+- **Hosts:** The targeted hosts or host groups from the inventory.
+- **Tasks:** A list of actions to be performed on the specified hosts.
+
+Think of a play as a connection between hosts and tasks. For instance, in the given example, tasks are run against the `webservers` host group. This setup constitutes a play.
+
+## Ansible Playbook:
+A playbook is a YAML text file containing one or more plays to execute in order. Playbooks provide a structured and repeatable way to automate tasks. They allow you to define multiple plays, each designed for different host groups.
+
+For instance, if you need to run distinct tasks against different host groups, you can achieve this by adding multiple plays within a playbook. Playbooks are powerful tools for orchestrating complex configurations and deployments.
+
+Remember:
+- **Play:** Connects hosts to tasks, executed in order within a playbook.
+- **Playbook:** Contains multiple plays, enabling automation across diverse host groups.
+
+Understanding these concepts empowers you to create organized, reusable, and efficient automation solutions in Ansible. Playbooks provide a structured approach to managing your infrastructure, making automation scalable and manageable.
+
+References:
+https://www.middlewareinventory.com/blog/ansible-playbook-example/
