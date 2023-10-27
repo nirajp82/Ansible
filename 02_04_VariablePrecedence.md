@@ -1,6 +1,6 @@
 # Ansible Variable Precedence
 
-This guide outlines the precedence of variables in Ansible, helping you understand which values take precedence when conflicts arise.
+Ansible variable precedence determines the order in which Ansible resolves variable values. When Ansible encounters a variable, it will search for the variable in each variable scope in turn, starting with the most specific scope and ending with the most general scope. If the variable is found in a more specific scope, it will be used in preference to a variable with the same name in a less specific scope.
 
 ## Table of Contents
 
@@ -176,4 +176,6 @@ webserver_port: 8080
     line: "Listen {{ webserver_port }}"
 ```
 In this example, the value of the webserver_port variable used in the Configure Apache2 task will be 8080, because the task variable has the highest precedence.
+
+Reference: https://medium.com/trendfingers/variable-precedence-in-ansible-2a3dba7766ab#:~:text=10.,variables%20can't%20be%20overridden.
 
