@@ -137,6 +137,7 @@ Here is an example of how to use the `hostvars` scope to override the value of a
 ansible_python_interpreter: /usr/bin/python2
 
 # Host variables
+[webservers:example.com]
 webserver_python_interpreter: /usr/bin/python3
 
 # Task
