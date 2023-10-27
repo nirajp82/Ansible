@@ -19,7 +19,7 @@ When an Ansible playbook runs, it automatically collects facts from the target h
 **Note** - In Ansible, facts gathering is limited to the hosts explicitly mentioned in the playbook's hosts directive. Ansible will only collect facts for the hosts mentioned in the specified playbook.
 
 Suppose your /etc/ansible/hosts file contains two servers, web1 and web2. If your playbook specifies only web1 as the target host:
-# /etc/ansible/hosts
+-- /etc/ansible/hosts
 ```
 web1
 web2
