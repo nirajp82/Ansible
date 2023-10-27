@@ -183,3 +183,22 @@ In this task:
 When the playbook runs, it uses these variables to render the `index.html.j2` template, creating the final HTML file with or without the footer based on the `show_footer` variable's value.
 
 By using variables and Jinja2 templating, Ansible allows you to create flexible, dynamic, and reusable automation solutions.
+
+**4. [all:vars]:**
+In Ansible, `[all:vars]` is a section in an inventory file that allows you to define variables that apply to all hosts listed in the inventory. Variables defined under `[all:vars]` are global and will be available for all hosts, groups, and plays specified in the inventory file.
+
+For example, consider the following inventory file:
+
+```ini
+[all:vars]
+ansible_user=admin
+ansible_ssh_private_key_file=/path/to/private_key.pem
+
+[web_servers]
+web1 ansible_host=192.168.1.1
+web2 ansible_host=192.168.1.2
+```
+
+In this example, `[all:vars]` is used to define two variables: `ansible_user` and `ansible_ssh_private_key_file`. These variables are applicable to all hosts in the inventory. So, any tasks or plays that run on `web1` and `web2` will use the `admin` user and the specified SSH private key file.
+
+By defining variables in `[all:vars]`, you can avoid duplicating variable definitions for each host or group in your inventory file, making it more manageable and efficient, especially when you have a large number of hosts that share common configuration settings.
