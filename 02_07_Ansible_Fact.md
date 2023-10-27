@@ -16,6 +16,24 @@ To see the ‘raw’ information as gathered, run this command at the command li
 
 When an Ansible playbook runs, it automatically collects facts from the target hosts. This process involves executing small scripts, called "gather facts modules" ("setup module") on the remote systems as part of the setup process. These modules are part of Ansible's standard library. They collect information and store it in variables, making it accessible for use within the playbook.
 
+**Note** - In Ansible, facts gathering is limited to the hosts explicitly mentioned in the playbook's hosts directive. Ansible will only collect facts for the hosts mentioned in the specified playbook.
+
+Suppose your /etc/ansible/hosts file contains two servers, web1 and web2. If your playbook specifies only web1 as the target host:
+# /etc/ansible/hosts
+```
+web1
+web2
+```
+
+```yml
+- hosts: web1
+  tasks:
+    - name: Task 1
+      debug:
+        msg: "This task runs on web1 only"
+```
+In this case, Ansible will collect facts only for the web1 host. Even though web2 is mentioned in the inventory file, its facts won't be gathered because it's not referenced in the playbook. This selective gathering of facts allows you to optimize the information collection process, especially when dealing with large inventories.
+
 **Flow of Gathering Facts:**
 
 1. **Playbook Execution Begins:** When you run an Ansible playbook, the first step involves connecting to the target hosts specified in the inventory file.
