@@ -103,6 +103,10 @@ The Ansible variable precedence is as follows:
 6. **Facts:** Facts gathered from the current host.
 7. **Global variables:** Variables defined in the Ansible configuration file, environment variables, and command line arguments.
 
+   Task variables have the highest precedence, followed by block variables, role variables, play variables, host variables, facts, and global variables.
+
+This means that a variable defined in the current task will override a variable with the same name defined in the block, role, play, host, fact, or global scope.
+
 It is important to note that variable precedence is hierarchical, meaning that variables in more specific scopes have higher precedence than variables in less specific scopes. This means that a variable defined in the current task will override a variable with the same name defined in the playbook.
 
 Here is an example of how variable precedence works in Ansible:
@@ -143,6 +147,30 @@ webserver_python_interpreter: /usr/bin/python3
 ```
 
 In this example, the `ansible_python_interpreter` variable is defined in the global scope. However, the `webserver_python_interpreter` variable is defined in the host scope for the host `example.com`. This means that the `Install Python3` task will only be executed on the host `example.com`.
+
+```yaml
+# Global variable
+ansible_python_interpreter: /usr/bin/python2
+
+# Play variable
+webserver_port: 80
+
+# Host variable
+webserver_port: 443
+
+# Task variable
+webserver_port: 8080
+
+# ...
+
+# Task
+- name: Configure Apache2
+  lineinfile:
+    path: /etc/apache2/sites-available/000-default
+    line: "Listen {{ webserver_port }}"
+```
+In this example, the value of the webserver_port variable used in the Configure Apache2 task will be 8080, because the task variable has the highest precedence.
+
 
 By understanding how variable precedence works in Ansible, you can write more efficient and reusable playbooks.
 
