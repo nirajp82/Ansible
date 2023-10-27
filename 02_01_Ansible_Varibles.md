@@ -6,10 +6,81 @@ Variables in Ansible are used to store values that can be later referenced and u
 
 Variables can be declared in several places:
 
-- **Inventory Files:** Variables can be associated with hosts or groups in inventory files.
-- **Playbooks:** Variables can be defined directly in playbooks.
-- **Roles:** Variables can be defined in role defaults, vars files, or task files.
-- **External Sources:** Variables can also come from external sources, like command outputs or files read in tasks.
+Variables in Ansible can be declared in the following places:
+
+* **Playbook:** Variables can be declared at the top of the playbook, before any tasks are defined. These variables will be available to all tasks in the playbook.
+* **Roles:** Variables can be declared in roles. Roles are reusable collections of tasks and variables that can be used in multiple playbooks. Variables declared in roles will be available to all tasks in the role.
+* **Host inventory:** Variables can be declared in the host inventory. The host inventory is a file that lists all of the hosts that Ansible will manage. Variables declared in the host inventory will be available to all tasks that are executed on the host.
+* **Task:** Variables can be declared within tasks. These variables will only be available to the task in which they are declared.
+
+Here are some examples of how to declare variables in Ansible:
+
+**Playbook:**
+
+```yaml
+---
+- hosts: all
+  vars:
+    webserver_port: 80
+
+  tasks:
+    - name: Configure Apache2
+      lineinfile:
+        path: /etc/apache2/sites-available/000-default
+        line: "Listen {{ webserver_port }}"
+```
+
+**Role:**
+
+```yaml
+---
+- hosts: all
+  roles:
+    - webservers
+
+  tasks:
+    - name: Install Apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: Configure Apache2
+      lineinfile:
+        path: /etc/apache2/sites-available/000-default
+        line: "Listen {{ webserver_port }}"
+```
+
+**Host inventory:**
+
+```yaml
+[webservers]
+example.com
+webserver_port: 443
+```
+
+**Task:**
+
+```yaml
+---
+- hosts: all
+  tasks:
+    - name: Configure Apache2
+      lineinfile:
+        path: /etc/apache2/sites-available/000-default
+        line: "Listen {{ webserver_port }}"
+      vars:
+        webserver_port: 8080
+```
+
+In the above examples, the `webserver_port` variable is declared in different places. The precedence of these variables is as follows:
+
+1. Task variables
+2. Host variables
+3. Role variables
+4. Playbook variables
+
+This means that the `webserver_port` variable declared in the task will override the `webserver_port` variable declared in the host inventory, role, and playbook.
+
 
 **Example of Declaring Variables:**
 
