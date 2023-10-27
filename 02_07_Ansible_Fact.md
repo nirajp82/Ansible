@@ -1,10 +1,20 @@
 **Ansible Facts:**
 
-Ansible facts are pieces of information about remote systems that Ansible gathers automatically during the playbook execution. These facts include details about the system's hardware, operating system, network interfaces, and other characteristics. Ansible uses these facts to make intelligent decisions during playbook execution, allowing for dynamic and adaptable automation.
+Ansible facts are data related to your remote systems, including operating systems, IP addresses, attached filesystems, and more. You can access this data in the ansible_facts variable. By default, you can also access some Ansible facts as top-level variables with the ansible_ prefix. You can disable this behavior using the INJECT_FACTS_AS_VARS setting. 
+
+```yaml
+- name: Print all available facts
+  ansible.builtin.debug:
+    var: ansible_facts
+```
+
+To see the ‘raw’ information as gathered, run this command at the command line:
+
+```ansible <hostname> -m ansible.builtin.setup```
 
 **How Ansible Gathers Facts:**
 
-When an Ansible playbook runs, it automatically collects facts from the target hosts. This process involves executing small scripts, called "gather facts modules," on the remote systems. These modules are part of Ansible's standard library. They collect information and store it in variables, making it accessible for use within the playbook.
+When an Ansible playbook runs, it automatically collects facts from the target hosts. This process involves executing small scripts, called "gather facts modules" ("setup module") on the remote systems as part of the setup process. These modules are part of Ansible's standard library. They collect information and store it in variables, making it accessible for use within the playbook.
 
 **Flow of Gathering Facts:**
 
@@ -27,9 +37,6 @@ Consider a playbook that needs to install a package based on the Linux distribut
 - name: Gather Facts Example
   hosts: web_servers
   tasks:
-    - name: Gather Facts
-      setup:  # The setup module gathers facts about the target host
-
     - name: Install Package
       package:
         name: "{{ 'apache2' if ansible_facts['ansible_distribution'] == 'Ubuntu' else 'httpd' }}"
