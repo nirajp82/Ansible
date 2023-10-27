@@ -34,9 +34,13 @@ Here are some examples of how to declare variables in Ansible:
 
 ```yaml
 ---
+---
 - hosts: all
   roles:
     - webservers
+
+  vars:
+    webserver_port: 80
 
   tasks:
     - name: Install Apache2
@@ -48,6 +52,7 @@ Here are some examples of how to declare variables in Ansible:
       lineinfile:
         path: /etc/apache2/sites-available/000-default
         line: "Listen {{ webserver_port }}"
+
 ```
 
 **Host inventory:**
