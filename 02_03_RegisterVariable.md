@@ -9,7 +9,6 @@
 
 ## 1. Registering Variables and Accessing Their Values
 
-Registering Variables and Accessing Their Values
 **Registering Variables**
 
 Registering variables in Ansible allows you to store the output of a task or the results of a loop in a variable. This can be useful for a variety of purposes, such as:
