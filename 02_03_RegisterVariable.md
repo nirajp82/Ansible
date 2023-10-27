@@ -91,6 +91,60 @@ Registering variables is a powerful feature of Ansible that allows you to store 
 
 
 ## Understanding Variable Precedence in Ansible
+Ansible variable precedence determines the order in which Ansible resolves variable values. When Ansible encounters a variable, it will search for the variable in each variable scope in turn, starting with the most specific scope and ending with the most general scope. If the variable is found in a more specific scope, it will be used in preference to a variable with the same name in a less specific scope.
+
+The Ansible variable precedence is as follows:
+
+1. **Task variables:** Variables defined in the current task.
+2. **Block variables:** Variables defined in the current block.
+3. **Role variables:** Variables defined in the role that is being executed.
+4. **Play variables:** Variables defined in the playbook.
+5. **Host variables:** Variables defined for the current host in the inventory.
+6. **Facts:** Facts gathered from the current host.
+7. **Global variables:** Variables defined in the Ansible configuration file, environment variables, and command line arguments.
+
+It is important to note that variable precedence is hierarchical, meaning that variables in more specific scopes have higher precedence than variables in less specific scopes. This means that a variable defined in the current task will override a variable with the same name defined in the playbook.
+
+Here is an example of how variable precedence works in Ansible:
+
+```yaml
+# Play variables
+webserver_port: 80
+
+# Host variables
+webserver_port: 443
+
+# Task
+- name: Configure Apache2
+  lineinfile:
+    path: /etc/apache2/sites-available/000-default
+    line: "Listen {{ webserver_port }}"
+
+```
+
+In this example, the `webserver_port` variable is defined in both the play scope and the host scope. However, the host scope has higher precedence than the play scope. This means that the value of the `webserver_port` variable will be 443, which is the value defined in the host scope.
+
+You can also use variable precedence to override the default behavior of Ansible. For example, you can use the `hostvars` scope to override the value of a global variable for a specific host. This can be useful for configuring hosts with different settings.
+
+Here is an example of how to use the `hostvars` scope to override the value of a global variable:
+
+```yaml
+# Global variables
+ansible_python_interpreter: /usr/bin/python2
+
+# Host variables
+webserver_python_interpreter: /usr/bin/python3
+
+# Task
+- name: Install Python3
+  apt:
+    name: python3
+  when: ansible_python_interpreter != hostvars['webserver_python_interpreter']
+```
+
+In this example, the `ansible_python_interpreter` variable is defined in the global scope. However, the `webserver_python_interpreter` variable is defined in the host scope for the host `example.com`. This means that the `Install Python3` task will only be executed on the host `example.com`.
+
+By understanding how variable precedence works in Ansible, you can write more efficient and reusable playbooks.
 
 Ansible applies variable precedence, which determines the order in which variables are chosen when multiple options exist. Here's the precedence order from least to greatest (variables listed last override all others):
 
