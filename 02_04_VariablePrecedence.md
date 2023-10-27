@@ -20,6 +20,7 @@ Role defaults have the lowest precedence. They are defined in the role's `defaul
 
 Example:
 ```yaml
+# roles/role_name/defaults/main.yml
 ---
 nginx_port: 80
 ```
@@ -29,6 +30,8 @@ Variables defined in the inventory file relate to specific hosts.
 
 Example:
 ```ini
+# inventory.ini
+
 web_server ansible_host=192.168.1.1 nginx_port=8080
 ```
 
