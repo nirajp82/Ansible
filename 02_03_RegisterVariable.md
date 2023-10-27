@@ -127,7 +127,7 @@ webserver_port: 443
 
 ```
 
-In this example, the `webserver_port` variable is defined in both the play scope and the host scope. However, the host scope has higher precedence than the play scope. This means that the value of the `webserver_port` variable will be 443, which is the value defined in the host scope.
+In this example, the `webserver_port` variable is defined in both the play scope and the host scope. However, the play scope has higher precedence than the play scope. This means that the value of the `webserver_port` variable will be 80, which is the value defined in the play scope.
 
 You can also use variable precedence to override the default behavior of Ansible. For example, you can use the `hostvars` scope to override the value of a global variable for a specific host. This can be useful for configuring hosts with different settings.
 
