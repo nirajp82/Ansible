@@ -1,5 +1,3 @@
-Certainly! Let me provide a comprehensive explanation with the provided examples, roles, and their usage in playbooks.
-
 ### **Understanding Ansible Roles:**
 
 **What are Roles?**
