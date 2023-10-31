@@ -10,6 +10,11 @@ System modules are used to manage the overall system configuration and state of 
 * `yum`: Manage packages on Red Hat-based systems.
 * `user`: Manage users and groups on remote hosts.
 * `service`: Manage services on remote hosts.  Controls services (start, stop, restart, etc.) on target systems.
+
+  Note: The use of started instead of start is based on the readability and clarity of playbooks. Using state: started clearly conveys the intention that the service should be in the "started" state. It emphasizes the state that the service should be in, rather than the action that needs to be performed.
+
+In other words, when you specify state: started, you are telling Ansible that the service should be running or in the "started" state. Ansible internally handles the logic to start the service if it is not already running.
+   
 * `file`: Manage files and directories on remote hosts.
 * `package`: Manages installation, removal, and updating of packages on target systems.
 * `cron`: Manages cron jobs and scheduled tasks on target systems.
