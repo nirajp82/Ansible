@@ -14,19 +14,77 @@ Ansible Lint reports errors, warnings, and suggestions for improvement in the fo
 * **Best practices:** Ansible Lint will check for any best practices violations in your playbook, such as using the correct module names, avoiding hard-coded values, and using variables consistently.
 * **Security:** Ansible Lint will check for any security vulnerabilities in your playbook, such as using the correct permissions for files and directories, and avoiding the use of unsafe modules.
 
-Here is an example of an Ansible Lint report:
+
+Here is an example:
+
+- playbook.yml
+```yaml
+- hosts: all
+  tasks:
+  - name: Install Apache
+    shell: yum -y install httpd
+```
+
+```
+ansible-lint playbook.yml
+```
+
+**Ansible Lint report:**
 
 ```
 INFO: File: playbook.yml
-INFO: All playbooks should be named
-ERROR: task 'Install Apache' does not have an inventory
 WARNING: Use FQCN for builtin module actions (shell)
-SUGGESTION: Use the 'apt' module instead of the 'shell' module for installing packages
+SUGGESTION: Use the 'yum' module instead of the 'shell' module for installing packages
 ```
 
-This report shows that the playbook is missing a name, a task is missing an inventory, and the shell module is being used to install a package when the apt module should be used instead.
+**After the fix:**
 
-Ansible Lint is a valuable tool for improving the quality of your Ansible playbooks. By using Ansible Lint to check your playbooks for errors and warnings, you can help to ensure that your playbooks are reliable and secure.
+```yaml
+- hosts: all
+  tasks:
+  - name: Install Apache
+    yum:
+      name: httpd
+      state: present
+```
+
+The fix replaces the `shell` module with the `yum` module to install the Apache package. This is a better practice, because the `yum` module is designed specifically for installing packages on RHEL systems.
+
+**Another example:**
+
+**Before the fix:**
+
+```yaml
+- hosts: all
+  tasks:
+  - name: Create a new user account
+    user:
+      name: myuser
+      state: present
+      groups: sudo
+```
+
+**Ansible Lint report:**
+
+```
+INFO: File: playbook.yml
+WARNING: No inventory specified for task 'Create a new user account'
+```
+
+**After the fix:**
+
+```yaml
+- hosts: all
+  tasks:
+  - name: Create a new user account
+    user:
+      name: myuser
+      state: present
+      groups: sudo
+      become: yes
+```
+
+The fix adds the `become: yes` option to the task. This is necessary because the `user` module requires elevated privileges to create new user accounts.
 
 Here is an example of how to use Ansible Lint to check a playbook:
 
