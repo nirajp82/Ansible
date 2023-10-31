@@ -57,3 +57,18 @@ This playbook will query the specified DynamoDB table and print the retrieved da
 **Note:** Ensure that you have appropriate AWS credentials and permissions configured to access DynamoDB.
 
 In summary, Ansible Collections provide a convenient way to organize, distribute, and manage Ansible content. They enhance modularity, simplify collaboration, and allow Ansible users to leverage pre-built modules and roles to automate various tasks, including interacting with cloud services like DynamoDB.
+
+---/playbooks/requirements.yml
+```yml
+collections:
+  - name: community.general
+    version: '1.0.0'
+  - name: amazon.aws
+    version: '1.2.1'
+```
+
+--Install Collections
+```sh
+cd playbooks/
+ansible-galaxy collection install -r requirements.yml
+```
