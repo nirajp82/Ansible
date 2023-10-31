@@ -48,7 +48,10 @@ SUGGESTION: Use the 'yum' module instead of the 'shell' module for installing pa
       state: present
 ```
 
-The fix replaces the `shell` module with the `yum` module to install the Apache package. This is a better practice, because the `yum` module is designed specifically for installing packages on RHEL systems.
+The fix replaces the `shell` module with the `yum` module to install the Apache package. This is a better practice, because the `yum` module is designed specifically for installing packages on RHEL systems. 
+The state: present option in Ansible modules will ensure that the package is installed and its latest version.
+
+For example, if the Apache web server package is already installed, but there is a newer version available in the repository, the yum module will upgrade the package to the newer version.
 
 **Another example:**
 
