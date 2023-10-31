@@ -33,7 +33,14 @@ Files modules are used to manage files and directories on remote hosts. Examples
 * `template`: Render a template file and copy it to a remote host.
 * `unarchive`: Unarchive a compressed file on a remote host.
 * `archive`: Archive a directory or set of files on a remote host.
-* `lineinfile`: Manage lines in files.
+* `lineinfile`: Manage lines in files. The lineinfile module in Ansible is used to ensure that a particular line is present or absent in a file. It can be helpful for editing configuration files, adding or modifying specific lines, and ensuring the content of a file matches the desired state.
+  ```yml
+  - name: Ensure a specific line is present in the configuration file
+  ansible.builtin.lineinfile:
+    path: /etc/myconfig.conf   # Path to the file
+    line: 'hostname = myserver' # The line you want to ensure is present
+  become: true                  # This allows the task to run with sudo privileges if necessary
+  ```
 * `copy`: Copies files from the Ansible control machine to remote systems.
 * `synchronize`: Synchronizes files between control machine and remote systems.
 * `assemble`:  Assembles files on the control machine and transfers them to remote systems.
