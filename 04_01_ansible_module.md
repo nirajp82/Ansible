@@ -98,6 +98,3 @@ Send notifications and alerts.
 * `mail`: Sends email notifications.
 
 This is just a small sample of the many Ansible modules that are available. For a complete list of modules, please see the Ansible documentation: https://docs.ansible.com/ansible/latest/module_plugin_guide/index.html.
-
-I hope this explanation is helpful!
-
