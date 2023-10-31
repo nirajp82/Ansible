@@ -35,6 +35,20 @@ Here is a more complex example of an Ansible loop:
 
 This task will create the `user1`, `user2`, and `user3` user accounts on all of the remote hosts. The `loop` keyword tells Ansible to iterate over the `users` variable and execute the task for each item in the variable.
 
+The {{ item }} variable is a special variable that is used in Ansible loops. It represents the current item in the loop. The {{ item }} variable will be replaced with the current item in the loop on each iteration.
+
+The {{ item }} variable can be used anywhere in the task, including the task module, arguments, and variables. For example, the following task will create a directory for each user account/
+
+```yaml
+- hosts: all
+  tasks:
+  - name: Create home directories
+    file:
+      path: "/home/{{ item }}"
+      state: directory
+    loop: "{{ users }}"
+```
+
 Ansible loops can also be used with conditional statements. For example, the following task will only install the Apache package if the `is_apache_installed` variable is set to `False`:
 
 ```yaml
