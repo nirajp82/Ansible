@@ -8,6 +8,8 @@ ansible-playbook playbook.yml --check
 
 If the playbook is syntactically correct and all of the modules are supported, Ansible will display a report of the changes that would be made if the playbook were run in normal mode.
 
+If a task uses a module that doesn't support check mode, the task will be skipped when you run the playbook in check mode.
+
 * **Diff mode:** Diff mode allows you to see the before-and-after state of the remote systems after running a playbook. This is a good way to verify that the playbook is making the expected changes. To run a playbook in diff mode, use the `--diff` option:
 
 ```
