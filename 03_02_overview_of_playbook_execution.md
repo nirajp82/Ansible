@@ -24,6 +24,17 @@ This comprehensive guide provides a thorough walkthrough of Ansible playbook exe
 5. **Gathering Facts (Optional):**
    - Ansible gathers system information (facts) by executing scripts on hosts, providing details like network settings and OS specifics.
    - Facts are stored in variables, enabling their utilization in playbooks for dynamic execution.
+   - Each time Ansible executes a task, the first step is to collect facts about nodes. These facts can be access with the hostvars variable
+  ```yml
+- name: Retrieve host vars
+  hosts:
+    - raspis
+    - server
+  tasks:
+    - debug:
+        var=hostvars[inventory_hostname]
+ ```
+   
 
 6. **Executing Tasks:**
    - Ansible sequentially executes tasks defined in the playbook, covering actions like package installations, file operations, and service restarts.
