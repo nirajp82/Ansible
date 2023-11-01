@@ -13,13 +13,18 @@ This is template.j2 file.
   hosts: localhost
   tasks:
     - name: Check if file 'myf.txt' exists and has size greater than 0
-      stat:
+      ansible.builtin.stat:
         path: /path/to/your/myf.txt  # Specify the correct path to your 'myf.txt' file
       register: file_info
 
     - name: Set condition based on file existence and size
       set_fact:
         condition: "{{ file_info.stat.exists and file_info.stat.size > 0 }}"
+
+    - name: Ensure the destination directory exists
+      ansible.builtin.file:
+        path: "/path/to/output/"
+        state: directory
 
     - name: Render HTML based on condition
       template:
