@@ -8,7 +8,7 @@ Here's an example of how you can use `set_fact` and conditionals together in an 
   hosts: your_target_hosts
   tasks:
     - name: Check if a file exists
-      stat:
+      ansible.builtin.stat:
         path: /path/to/your/file.txt
       register: file_status
 
