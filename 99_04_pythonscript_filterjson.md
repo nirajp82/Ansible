@@ -1,4 +1,4 @@
-Certainly! Let me provide you with a comprehensive example that includes an Ansible playbook, a Python script, and JSON data. In this example, the Ansible playbook will run the Python script to filter records from a JSON file where the country is "USA" and the state is "MD". The filtered data will be saved in a new JSON file. 
+This comprehensive example that includes an Ansible playbook, a Python script, and JSON data. In this example, the Ansible playbook will run the Python script to filter records from a JSON file where the country is "USA" and the state is "MD". The filtered data will be saved in a new JSON file. 
 
 ### JSON Data (`data.json`):
 
