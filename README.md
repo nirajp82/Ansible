@@ -209,6 +209,9 @@ The main playbook ties everything together and assigns roles to different server
 
 3. **Handlers:**
    - The `Restart Apache` handler in the `webserver` role ensures Apache is restarted when its configuration changes, ensuring the changes take effect.
+   - A handler named "Restart Apache" is defined in the `handlers/main.yml` file.
+   - This handler utilizes the `service` module to restart the Apache service (`apache2`) on the target machine.
+   - The handler is notified by the `template` task, meaning it will only execute if the configuration file is changed.
 
 4. **Inventory:**
    - The `inventory.ini` file lists the IP addresses and groups the servers (`webservers`, `appservers`, `dbservers`) to define where each role should be applied.
