@@ -111,6 +111,32 @@ db1 ansible_ssh_host=192.168.1.104
       state: link
   ```
 
+1. **Update package cache and install Apache**:
+   - Ansible uses the `apt` module to ensure that the `apache2` package is present on the target machine. If Apache is not already installed, this task will install it.
+
+2. **Configure Apache virtual host**:
+   - Ansible utilizes a Jinja2 template (`apache_virtualhost.conf.j2`) to configure Apache's virtual host settings.
+   - The template file defines the virtual host configuration with specific directives like `ServerAdmin`, `ServerName`, `DocumentRoot`, etc.
+   - Ansible will render this template and place the resulting configuration file at `/etc/apache2/sites-available/myapp.conf` on the target machine.
+
+3. **Enable the virtual host**:
+   - This task creates a symbolic link from `/etc/apache2/sites-available/myapp.conf` to `/etc/apache2/sites-enabled/`, enabling the virtual host configuration.
+
+4. **Handlers - Restart Apache**:
+   - A handler named "Restart Apache" is defined in the `handlers/main.yml` file.
+   - This handler utilizes the `service` module to restart the Apache service (`apache2`) on the target machine.
+   - The handler is notified by the `template` task, meaning it will only execute if the configuration file is changed.
+
+Here's a summary of the workflow:
+- Ansible runs the tasks listed in `webserver/tasks/main.yml` sequentially.
+- The Apache package is installed (if not already present).
+- The virtual host configuration is rendered from the Jinja2 template and placed in the appropriate directory.
+- The virtual host configuration is enabled by creating a symbolic link.
+- If the configuration file changes, the "Restart Apache" handler is triggered, ensuring that Apache is restarted to apply the new configuration.
+
+This playbook is designed to ensure that Apache is installed and configured correctly on the target machine, providing a streamlined and automated approach to managing web server deployments.
+
+
 - **`webserver/templates/apache_virtualhost.conf.j2`**:
 
   ```apache
